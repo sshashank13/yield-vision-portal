@@ -20,18 +20,18 @@ const History = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
 
-  // Redirect to login if not authenticated
-  if (!isAuthenticated) {
-    navigate("/login");
-    return null;
-  }
-
   useEffect(() => {
     if (user) {
       const predictions = getPredictionHistory(user.id);
       setHistory(predictions);
     }
   }, [user]);
+
+  // Redirect to login if not authenticated
+  if (!isAuthenticated) {
+    navigate("/login");
+    return null;
+  }
 
   const handleClearHistory = () => {
     if (user) {

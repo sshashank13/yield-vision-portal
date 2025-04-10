@@ -15,7 +15,6 @@ const Predict = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
 
-  // Redirect to login if not authenticated
   if (!isAuthenticated) {
     navigate("/login");
     return null;
