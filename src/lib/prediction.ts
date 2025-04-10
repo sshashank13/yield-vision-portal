@@ -47,7 +47,32 @@ export const predictYield = (input: PredictionInput): PredictionResult => {
     "siltyLoam": 1.1
   };
   
-  // Calculate final yield prediction
+  // Apply new factors
+  const soilQualityFactor: Record<string, number> = {
+    "poor": 0.8,
+    "fair": 0.9,
+    "good": 1.0,
+    "excellent": 1.2
+  };
+  
+  // Seed variety factor (simplified)
+  // In a real implementation, this would be more sophisticated based on actual seed varieties
+  const seedVarietyFactor = input.seedVariety.includes("hybrid") ? 1.15 : 1.0;
+  
+  const fertilizerFactor: Record<string, number> = {
+    "none": 0.7,
+    "organic": 0.9,
+    "chemical": 1.1,
+    "mixed": 1.2
+  };
+  
+  // Sunny days factor (assuming optimal is around 20-25 days per month)
+  const sunnyDaysFactor = 0.8 + (input.sunnyDays / 31) * 0.4;
+  
+  // Irrigation factor
+  const irrigationFactor = 0.7 + (input.irrigation / 500) * 0.6;
+  
+  // Calculate final yield prediction with all factors
   let yieldPrediction = baseYield * 
     nitrogenFactor * 
     phosphorusFactor * 
@@ -56,7 +81,12 @@ export const predictYield = (input: PredictionInput): PredictionResult => {
     temperatureFactor * 
     humidityFactor * 
     rainfallFactor * 
-    (soilTypeFactor[input.soilType] || 1.0);
+    (soilTypeFactor[input.soilType] || 1.0) *
+    (soilQualityFactor[input.soilQuality] || 1.0) *
+    seedVarietyFactor *
+    (fertilizerFactor[input.fertilizer] || 1.0) *
+    sunnyDaysFactor *
+    irrigationFactor;
   
   // Add some randomness to simulate real-world variation
   yieldPrediction *= (0.9 + Math.random() * 0.2);

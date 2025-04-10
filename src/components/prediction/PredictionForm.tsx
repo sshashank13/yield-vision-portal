@@ -36,6 +36,20 @@ const soilTypes = [
   "siltyLoam"
 ];
 
+const soilQualityOptions = [
+  "poor",
+  "fair",
+  "good",
+  "excellent"
+];
+
+const fertilizerTypes = [
+  "none",
+  "organic",
+  "chemical",
+  "mixed"
+];
+
 const formatSoilType = (type: string): string => {
   return type
     .replace(/([A-Z])/g, ' $1')
@@ -53,7 +67,13 @@ const PredictionForm = ({ onSubmit, isLoading }: PredictionFormProps) => {
     temperature: 25,
     humidity: 60,
     ph: 6.5,
-    rainfall: 200
+    rainfall: 200,
+    // New parameters with default values
+    soilQuality: "good",
+    seedVariety: "standard",
+    fertilizer: "organic",
+    sunnyDays: 20,
+    irrigation: 50
   });
 
   const handleChange = (name: keyof PredictionInput, value: string | number) => {
@@ -74,7 +94,7 @@ const PredictionForm = ({ onSubmit, isLoading }: PredictionFormProps) => {
         </CardDescription>
       </CardHeader>
       <form onSubmit={handleSubmit}>
-        <CardContent className="space-y-4">
+        <CardContent className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="cropType">Crop Type</Label>
@@ -93,6 +113,16 @@ const PredictionForm = ({ onSubmit, isLoading }: PredictionFormProps) => {
                   ))}
                 </SelectContent>
               </Select>
+            </div>
+            
+            <div className="space-y-2">
+              <Label htmlFor="seedVariety">Seed Variety</Label>
+              <Input
+                id="seedVariety"
+                value={input.seedVariety}
+                onChange={(e) => handleChange("seedVariety", e.target.value)}
+                placeholder="e.g., IR8, Sonalika"
+              />
             </div>
             
             <div className="space-y-2">
@@ -115,6 +145,25 @@ const PredictionForm = ({ onSubmit, isLoading }: PredictionFormProps) => {
             </div>
             
             <div className="space-y-2">
+              <Label htmlFor="soilQuality">Soil Quality</Label>
+              <Select
+                value={input.soilQuality}
+                onValueChange={(value) => handleChange("soilQuality", value)}
+              >
+                <SelectTrigger id="soilQuality">
+                  <SelectValue placeholder="Select soil quality" />
+                </SelectTrigger>
+                <SelectContent>
+                  {soilQualityOptions.map((quality) => (
+                    <SelectItem key={quality} value={quality}>
+                      {quality.charAt(0).toUpperCase() + quality.slice(1)}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+            
+            <div className="space-y-2">
               <Label htmlFor="area">Area (hectares)</Label>
               <Input
                 id="area"
@@ -125,6 +174,25 @@ const PredictionForm = ({ onSubmit, isLoading }: PredictionFormProps) => {
                 onChange={(e) => handleChange("area", parseFloat(e.target.value))}
                 required
               />
+            </div>
+            
+            <div className="space-y-2">
+              <Label htmlFor="fertilizer">Fertilizer Type</Label>
+              <Select
+                value={input.fertilizer}
+                onValueChange={(value) => handleChange("fertilizer", value)}
+              >
+                <SelectTrigger id="fertilizer">
+                  <SelectValue placeholder="Select fertilizer type" />
+                </SelectTrigger>
+                <SelectContent>
+                  {fertilizerTypes.map((type) => (
+                    <SelectItem key={type} value={type}>
+                      {type.charAt(0).toUpperCase() + type.slice(1)}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
             
             <div className="space-y-2">
@@ -232,6 +300,34 @@ const PredictionForm = ({ onSubmit, isLoading }: PredictionFormProps) => {
                   onValueChange={([value]) => handleChange("rainfall", value)}
                 />
                 <span className="w-12 text-center">{input.rainfall}</span>
+              </div>
+            </div>
+            
+            <div className="space-y-2">
+              <Label htmlFor="sunnyDays">Sunny Days (per month)</Label>
+              <div className="flex items-center space-x-4">
+                <Slider
+                  id="sunnyDays"
+                  min={0}
+                  max={31}
+                  value={[input.sunnyDays]}
+                  onValueChange={([value]) => handleChange("sunnyDays", value)}
+                />
+                <span className="w-12 text-center">{input.sunnyDays}</span>
+              </div>
+            </div>
+            
+            <div className="space-y-2">
+              <Label htmlFor="irrigation">Irrigation (mm)</Label>
+              <div className="flex items-center space-x-4">
+                <Slider
+                  id="irrigation"
+                  min={0}
+                  max={500}
+                  value={[input.irrigation]}
+                  onValueChange={([value]) => handleChange("irrigation", value)}
+                />
+                <span className="w-12 text-center">{input.irrigation}</span>
               </div>
             </div>
           </div>

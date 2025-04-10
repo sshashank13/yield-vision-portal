@@ -35,12 +35,16 @@ const HistoryItem = ({ result, onSelect }: HistoryItemProps) => {
             <span>{result.input.area} hectares</span>
           </div>
           <div className="flex justify-between text-sm">
-            <span className="text-muted-foreground">Confidence:</span>
-            <span>{result.confidence}%</span>
+            <span className="text-muted-foreground">Seed:</span>
+            <span>{result.input.seedVariety}</span>
           </div>
           <div className="flex justify-between text-sm">
-            <span className="text-muted-foreground">Soil:</span>
-            <span>{result.input.soilType.charAt(0).toUpperCase() + result.input.soilType.slice(1).replace(/([A-Z])/g, ' $1')}</span>
+            <span className="text-muted-foreground">Soil Quality:</span>
+            <span>{result.input.soilQuality.charAt(0).toUpperCase() + result.input.soilQuality.slice(1)}</span>
+          </div>
+          <div className="flex justify-between text-sm">
+            <span className="text-muted-foreground">Confidence:</span>
+            <span>{result.confidence}%</span>
           </div>
           
           <Button 

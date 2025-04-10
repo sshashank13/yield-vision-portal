@@ -16,6 +16,12 @@ export interface PredictionInput {
   humidity: number;
   ph: number;
   rainfall: number;
+  // New parameters
+  soilQuality: string;
+  seedVariety: string;
+  fertilizer: string;
+  sunnyDays: number;
+  irrigation: number;
 }
 
 export interface PredictionResult {
