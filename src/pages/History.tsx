@@ -5,7 +5,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { PredictionResult } from "@/types";
 import { getPredictionHistory, clearPredictionHistory } from "@/lib/prediction";
 import HistoryItem from "@/components/prediction/HistoryItem";
-import PredictionResult as PredictionResultComponent from "@/components/prediction/PredictionResult";
+import { default as PredictionResultComponent } from "@/components/prediction/PredictionResult";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter, DialogTrigger } from "@/components/ui/dialog";
 import { AlertTriangle, Plus } from "lucide-react";

@@ -5,7 +5,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { PredictionInput, PredictionResult } from "@/types";
 import { predictYield, savePrediction } from "@/lib/prediction";
 import PredictionForm from "@/components/prediction/PredictionForm";
-import PredictionResult as PredictionResultComponent from "@/components/prediction/PredictionResult";
+import { default as PredictionResultComponent } from "@/components/prediction/PredictionResult";
 import { useToast } from "@/hooks/use-toast";
 
 const Predict = () => {
