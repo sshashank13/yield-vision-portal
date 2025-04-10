@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,7 +62,44 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+				// Custom colors
+				forest: {
+					50: '#e6f0ec',
+					100: '#cce1d9',
+					200: '#99c4b4',
+					300: '#66a68e',
+					400: '#408a71',
+					500: '#2D6A4F', // Primary green
+					600: '#245440',
+					700: '#1b3f30',
+					800: '#122a20',
+					900: '#091510',
+				},
+				earth: {
+					50: '#f5f2ee',
+					100: '#ebe6dd',
+					200: '#d7ccbc',
+					300: '#c3b39a',
+					400: '#b49c83',
+					500: '#A98467', // Secondary brown
+					600: '#876a52',
+					700: '#654f3e',
+					800: '#443529',
+					900: '#221a15',
+				},
+				wheat: {
+					50: '#fcf8f0',
+					100: '#f9f1e1',
+					200: '#f3e3c3',
+					300: '#edd5a5',
+					400: '#e7c87f',
+					500: '#DDA15E', // Accent color
+					600: '#b1814b',
+					700: '#856138',
+					800: '#594126',
+					900: '#2c2013',
+				},
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
